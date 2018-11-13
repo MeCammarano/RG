@@ -1,0 +1,12 @@
+<button (click)="replaceAll()">Replace all rows</button>
+<!-- <button (click)="partialUpdate()"></button>
+<button (click)="swapRows()"></button>
+<button (click)="removeRows()"></button>
+<button (click)="createManyRows()"></button> -->
+<table>
+    <tr *ngFor="let i of data">
+        <td>{{ i.name }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.city }}</td>
+    </tr>
+</table>
