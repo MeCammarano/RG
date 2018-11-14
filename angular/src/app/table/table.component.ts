@@ -28,4 +28,8 @@ export class TableComponent implements OnInit {
     })
   }
 
+  removeRow() {
+    this.data.splice(0, 1); 
+  }
+
 }
