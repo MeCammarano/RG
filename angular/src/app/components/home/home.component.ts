@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.title.setTitle('Home / Angular SSR');
         this.meta.updateTag({
-            'description': 'Welcome to home section'
+            'description': 'Home'
         });
     }
 }
