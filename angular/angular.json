@@ -3,32 +3,25 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-universal-demo": {
+    "angular-ssr-example": {
       "root": "",
+      "sourceRoot": "src",
       "projectType": "application",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/browser",
+            "outputPath": "dist-browser",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "main": "src/browser.main.ts",
+            "tsConfig": "src/browser.tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              },
-              {
-                "glob": "favicon.ico",
-                "input": "src",
-                "output": "/"
-              }
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -55,18 +48,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-universal-demo:build"
+            "browserTarget": "angular-ssr-example:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-universal-demo:build:production"
+              "browserTarget": "angular-ssr-example:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-universal-demo:build"
+            "browserTarget": "angular-ssr-example:build"
           }
         },
         "test": {
@@ -78,27 +71,20 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              },
-              {
-                "glob": "favicon.ico",
-                "input": "src",
-                "output": "/"
-              }
+              "src/assets",
+              "src/favicon.ico"
             ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
-          "options": {            
+          "options": {
             "tsConfig": [
-              "src/tsconfig.app.json"
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -108,40 +94,31 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/server",
-            "main": "src/main.server.ts",
-            "tsConfig": "src/tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            }
+            "outputPath": "dist-server",
+            "main": "src/server.main.ts",
+            "tsConfig": "src/server.tsconfig.app.json"
           }
         }
       }
     },
-    "ng-universal-demo-e2e": {
-      "root": "",
+    "angular-ssr-example-e2e": {
+      "root": "e2e",
+      "sourceRoot": "e2e",
       "projectType": "application",
-      "cli": {},
-      "schematics": {},
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ng-universal-demo:serve"
+            "devServerTarget": "angular-ssr-example:serve"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [],
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
@@ -150,33 +127,14 @@
       }
     }
   },
-  "cli": {},
+  "defaultProject": "angular-ssr-example",
   "schematics": {
-    "@schematics/angular:class": {
-      "spec": false
-    },
     "@schematics/angular:component": {
-      "spec": false,
-      "inlineStyle": true,
-      "inlineTemplate": true,
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "spec": false,
       "prefix": "app"
-    },
-    "@schematics/angular:guard": {
-      "spec": false
-    },
-    "@schematics/angular:module": {
-      "spec": false
-    },
-    "@schematics/angular:pipe": {
-      "spec": false
-    },
-    "@schematics/angular:service": {
-      "spec": false
     }
   }
 }
