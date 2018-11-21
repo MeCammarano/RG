@@ -11,7 +11,8 @@
     "build:browser": "ng build --prod --project angular-ssr-example",
     "build:server": "ng run angular-ssr-example:server",
     "build": "npm run build:browser && npm run build:server",
-    "serve": "node server.js"
+    "serve:server": "node server.js",
+    "serve:browser": "node server-browser.js"
   },
   "private": true,
   "dependencies": {
