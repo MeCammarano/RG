@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:browser": "ng build --prod --project angular-ssr-example",
-    "build:server": "ng run angular-ssr-example:server",
+    "build:browser": "ng build --prod --configuration browser --project angular-ssr-example",
+    "build:server": "ng run angular-ssr-example:server --configuration server",
     "build": "npm run build:browser && npm run build:server",
     "serve:server": "node server.js",
     "serve:browser": "node server-browser.js"
