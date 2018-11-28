@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ListComponent } from './components/list/list.component';
 import { ListReplaceComponent } from './components/listreplace/listreplace.component';
 
+import { StateService } from './state.service';
+
 
 @NgModule({
     declarations: [
@@ -23,6 +25,8 @@ import { ListReplaceComponent } from './components/listreplace/listreplace.compo
         AppRoutingModule,
         HttpClientModule
     ],
-    providers: []
+    providers: [
+        StateService
+    ]
 })
 export class AppModule { }

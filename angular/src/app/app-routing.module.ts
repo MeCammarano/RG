@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ListComponent } from './components/list/list.component';
 import { ListReplaceComponent } from './components/listreplace/listreplace.component';
+import { ListReplaceResolver } from './components/listreplace/listreplace.resolvers';
 
 const routes: Routes = [
     { 
@@ -16,7 +17,10 @@ const routes: Routes = [
     },
     { 
         path: 'listreplace', 
-        component: ListReplaceComponent 
+        component: ListReplaceComponent,
+        resolve : {
+            users : ListReplaceResolver
+        }
     },
     { 
         path: '**', 
@@ -25,7 +29,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports : [RouterModule.forRoot(routes)],
-    exports : [RouterModule]
+    imports   : [RouterModule.forRoot(routes)],
+    exports   : [RouterModule],
+    providers : [
+        ListReplaceResolver
+    ]
 })
 export class AppRoutingModule { }
