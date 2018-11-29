@@ -1,4 +1,4 @@
 export const environment = {
     production : true,
-    port       : '8080'
+    baseUrl    : 'http://172.19.52.70:8080'
 };

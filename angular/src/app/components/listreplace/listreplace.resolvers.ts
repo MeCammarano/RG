@@ -24,7 +24,7 @@ export class ListReplaceResolver implements Resolve<any> {
                 var users = this.stateService.get();
 
                 if(users.length == 0) {
-                    this.http.get('http://localhost:'+(<any>environment).port+'/assets/data.json')
+                    this.http.get((<any>environment).baseUrl+'/assets/data.json')
                     .subscribe(
                         (usersResponse: any) => {
 

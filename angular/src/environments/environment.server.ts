@@ -1,4 +1,4 @@
 export const environment = {
     production : true,
-    port       : '3000'
+    baseUrl    : 'http://172.19.52.70:3000'
 };
