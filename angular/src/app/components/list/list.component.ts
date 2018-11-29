@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Title, Meta, TransferState, makeStateKey } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
-
-import { environment } from '../../../environments/environment';
-
-// make state key in state to store users
-const STATE_KEY_USERS = makeStateKey('users');
+import { Title, Meta } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector    : 'list',
@@ -19,8 +14,7 @@ export class ListComponent implements OnInit {
     constructor(
         private title : Title,
         private meta  : Meta,
-        private http  : HttpClient,
-        private state : TransferState,
+        private route : ActivatedRoute
     ) { 
 
     }
@@ -32,20 +26,11 @@ export class ListComponent implements OnInit {
             'description': 'List'
         });
 
-        this.users = this.state.get(STATE_KEY_USERS, <any>[]);
-
-        if(this.users.length == 0) {
-            this.http.get('http://localhost:'+(<any>environment).port+'/assets/data.json')
-                .subscribe(
-                    (users) => {
-                        this.users = users;
-                        this.state.set(STATE_KEY_USERS, this.users);
-                    }, 
-                    (err) => {
-                        console.log(err);
-                    }
-                );
-        }
+        this.route.data.subscribe(
+            (data) => {
+                this.users = data.users;
+            }
+        );
 
     }
     

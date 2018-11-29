@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ListComponent } from './components/list/list.component';
 import { ListReplaceComponent } from './components/listreplace/listreplace.component';
 import { ListReplaceResolver } from './components/listreplace/listreplace.resolvers';
+import { ListResolver } from './components/list/list.resolvers';
 
 const routes: Routes = [
     { 
@@ -13,7 +14,10 @@ const routes: Routes = [
     },
     { 
         path: 'list', 
-        component: ListComponent 
+        component: ListComponent,
+        resolve : {
+            users : ListResolver
+        }
     },
     { 
         path: 'listreplace', 
@@ -32,6 +36,7 @@ const routes: Routes = [
     imports   : [RouterModule.forRoot(routes)],
     exports   : [RouterModule],
     providers : [
+        ListResolver,
         ListReplaceResolver
     ]
 })
