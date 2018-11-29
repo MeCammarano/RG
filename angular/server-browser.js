@@ -1,9 +1,11 @@
 const express = require('express');
-const path = require('path');
+const path    = require('path');
+var   cors    = require('cors');
 
 const app = express();
 
 // FRONT END
+    app.use(cors());
     app.use(express.static(path.join(__dirname + '/dist-browser')));
     app.get('*', function (request, response) {
         response.sendFile(path.join(__dirname + '/dist-browser/index.html'));
