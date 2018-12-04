@@ -24,25 +24,41 @@ export class ListReplaceResolver implements Resolve<any> {
                 var users = this.stateService.get();
 
                 if(users.length == 0) {
-                    this.http.get((<any>environment).baseUrl+'/assets/data.json')
-                    .subscribe(
-                        (usersResponse: any) => {
 
-                            for (let i = 0; i < 100000000; i++) {
-                                const [num1, num2] = [Math.floor(Math.random() * usersResponse.length), Math.floor(Math.random() * usersResponse.length)];
-                                [usersResponse[num1], usersResponse[num2]] = [usersResponse[num2], usersResponse[num1]];
+                    var number = (route.params.number) ? (route.params.number) : 1;
+
+                    var promises = []; 
+
+                    for(var i=0; i<number; i++) {
+                        promises.push(this.http.get((<any>environment).baseUrl+'/assets/data.json').toPromise());
+                    }  
+
+                    Promise.all(promises).then(
+                        (values) => {
+
+                            var merged = [];
+
+                            for(var value of values) {
+
+                                for (let i = 0; i < 100000000; i++) {
+                                    const [num1, num2] = [Math.floor(Math.random() * value.length), Math.floor(Math.random() * value.length)];
+                                    [value[num1], value[num2]] = [value[num2], value[num1]];
+                                }
+
+                                merged = merged.concat(value);
+
                             }
 
-                            this.stateService.set(usersResponse);
-
-                            return resolve(usersResponse);
+                            this.stateService.set(merged);
+                            return resolve(merged);
 
                         },
                         (err) => {
                             console.log(err);
                             return reject(err);
                         }
-                    );
+                    ); 
+                
                 }
                 else {
                     return resolve(users);

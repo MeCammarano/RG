@@ -24,17 +24,34 @@ export class ListResolver implements Resolve<any> {
                 var users = this.stateService.get();
 
                 if(users.length == 0) {
-                    this.http.get((<any>environment).baseUrl+'/assets/data.json')
-                    .subscribe(
-                        (usersResponse: any) => {
-                            this.stateService.set(usersResponse);
-                            return resolve(usersResponse);
+
+                    var number = (route.params.number) ? (route.params.number) : 1;
+
+                    var promises = []; 
+
+                    for(var i=0; i<number; i++) {
+                        promises.push(this.http.get((<any>environment).baseUrl+'/assets/data.json').toPromise());
+                    }  
+
+                    Promise.all(promises).then(
+                        (values) => {
+
+                            var merged = [];
+
+                            for(var value of values) {
+                                merged = merged.concat(value);
+                            }
+
+                            this.stateService.set(merged);
+                            return resolve(merged);
+
                         },
                         (err) => {
                             console.log(err);
                             return reject(err);
                         }
-                    );
+                    );                  
+
                 }
                 else {
                     return resolve(users);

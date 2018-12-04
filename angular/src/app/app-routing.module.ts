@@ -13,14 +13,14 @@ const routes: Routes = [
         component: HomeComponent 
     },
     { 
-        path: 'list', 
+        path: 'list/:number', 
         component: ListComponent,
         resolve : {
             users : ListResolver
         }
     },
     { 
-        path: 'listreplace', 
+        path: 'listreplace/:number', 
         component: ListReplaceComponent,
         resolve : {
             users : ListReplaceResolver
