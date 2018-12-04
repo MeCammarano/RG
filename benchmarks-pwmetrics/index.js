@@ -1,13 +1,13 @@
 const PWMetrics = require('pwmetrics');
 
 const testsMode = [
-    {
-        name    : 'CLIENT SIDE RENDERING',
-        baseUrl : 'http://localhost:8080/'
-    },
+    // {
+    //     name    : 'CLIENT SIDE RENDERING',
+    //     baseUrl : 'http://localhost:8080/'
+    // },
     {
         name    : 'SERVER SIDE RENDERING',
-        baseUrl : 'http://localhost:3000/'
+        baseUrl : 'http://172.19.54.102:3000/'
     }
 ];
 
@@ -24,8 +24,8 @@ const testsEndpoints = [
 
 const optionsDesktop = {
     flags: {
-        runs        : 1,           
-        // chromeFlags : '--headless', 
+        runs        : 1,
+        // chromeFlags : '--headless',
         json                 : true,
         disableStorageReset  : false,
         emulatedFormFactor   : 'desktop',
@@ -42,8 +42,8 @@ const optionsDesktop = {
 
 const optionsMobile = {
     flags: {
-        runs        : 1,           
-        // chromeFlags : '--headless', 
+        runs        : 1,
+        // chromeFlags : '--headless',
         json                 : true,
         showOutput           : true,
         disableStorageReset  : false,
@@ -70,7 +70,7 @@ const optionsMobile = {
 
             console.log('-----------------------------------------------------------');
             console.log(endpoint.name);
-        
+
             console.log('-------------------------------------------');
             console.log('DESKTOP - THROTTLING DISABLED');
             console.log('-------------------------------------------');
@@ -80,9 +80,9 @@ const optionsMobile = {
             console.log('MOBILE - THROTTLING ENABLED');
             console.log('-------------------------------------------');
             const csrMobile  = await new PWMetrics(mode.baseUrl+endpoint.path, optionsMobile).start();
-        
+
         }
-    
+
     }
 
 })();
