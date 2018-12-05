@@ -1,1 +1,5 @@
-export default () => <div>Welcome to next.js!</div>
+import HelloComponent from '../components/hello';
+
+export default () => (
+    <HelloComponent />
+)
