@@ -1,13 +1,12 @@
 import React from 'react'
+import { getData, getTemplate } from './utils';
 
 export default class extends React.Component {
-    static async getInitialProps({ req }) {
-        const res = await fetch('http://localhost:3000/static/data.json')
-        const data = await res.json();
-        return { data }
+    static async getInitialProps({ query }) {
+        return { data: await getData(query.rep) }
     }
 
     render() {
-        return this.props.data.map(x => <p>{x.name}</p>)
+        return getTemplate(this.props.data);
     }
 }

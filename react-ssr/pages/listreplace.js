@@ -1,9 +1,6 @@
 import React from 'react';
-import 'isomorphic-fetch';
+import { getData, getTemplate } from './utils';
 
-const divStyle = {
-    textAlign: 'center'
-}
 
 const scrambleData = (data) => {
     for (let value of data) {
@@ -16,12 +13,10 @@ const scrambleData = (data) => {
 }
 
 export default class extends React.Component {
-    static async getInitialProps({ req, query }) {
+    static async getInitialProps({ query }) {
         const promises = [];
         try {
-            for (let i = 0; i < query.rep; i++)
-                promises.push(await fetch('http://localhost:3000/static/data.json').then(data => data.json()))
-            return { data: scrambleData(await Promise.all(promises)) }
+            return { data: scrambleData(await getData(query.rep)) }
         }
         catch (err) {
             console.error(err);
@@ -29,14 +24,6 @@ export default class extends React.Component {
     }
 
     render() {
-        return (
-            <div style={divStyle}>
-                <h2>List and Replace</h2>
-                <h2>Size: {this.props.data ? this.props.data.length * this.props.data[0].length : null}</h2>
-                <ol>
-                    {this.props.data.map(x => x.map((user, i) => <li key={'user-' + i}>{user.name} ({user.email})</li>))}
-                </ol>
-            </div>
-        )
+        return getTemplate(this.props.data);
     }
 }
