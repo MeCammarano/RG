@@ -1,5 +1,5 @@
 import React from 'react'
-import { getData, getTemplate } from './utils';
+import { getData, getTemplate } from '../utils';
 
 export default class extends React.Component {
     static async getInitialProps({ query }) {
