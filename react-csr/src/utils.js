@@ -3,7 +3,7 @@ import React from 'react';
 export const getData = async (reps) => {
     const promises = [];
     for (let i = 0; i < reps; i++)
-        promises.push(await fetch('http://localhost:3001/data.json').then(data => data.json()))
+        promises.push(await fetch('data.json').then(data => data.json()))
     return Promise.all(promises);
 }
 
