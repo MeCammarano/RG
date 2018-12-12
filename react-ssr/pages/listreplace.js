@@ -1,5 +1,5 @@
 import React from 'react';
-import { getData, getTemplate } from '../utils';
+import { getData, getTemplate, divStyle } from '../utils';
 
 
 const scrambleData = (data) => {
@@ -24,6 +24,11 @@ export default class extends React.Component {
     }
 
     render() {
-        return getTemplate(this.props.data);
+        return (
+            <div style={divStyle}>
+                <h2>List and Replace</h2>
+                {getTemplate(this.props.data)}
+            </div>
+        )
     }
 }

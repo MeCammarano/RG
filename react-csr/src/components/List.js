@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as qs from 'query-string';
-import { getData, getTemplate } from '../utils';
+import { getData, getTemplate, divStyle } from '../utils';
 
 export class List extends Component {
 
@@ -19,6 +19,11 @@ export class List extends Component {
     }
 
     render() {
-        return getTemplate(this.state.data);
+        return (
+            <div style={divStyle}>
+                <h2>List</h2>
+                {getTemplate(this.state.data)}
+            </div>
+        )
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getData, getTemplate } from '../utils';
+import { getData, getTemplate, divStyle } from '../utils';
 
 export default class extends React.Component {
     static async getInitialProps({ query }) {
@@ -7,6 +7,11 @@ export default class extends React.Component {
     }
 
     render() {
-        return getTemplate(this.props.data);
+        return (
+            <div style={divStyle}>
+                <h2>List</h2>
+                {getTemplate(this.props.data)}
+            </div>
+        )
     }
 }

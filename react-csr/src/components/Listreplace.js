@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as qs from 'query-string';
-import { getData, getTemplate } from '../utils';
+import { getData, getTemplate, divStyle } from '../utils';
 
 const scrambleData = (data) => {
     for (let value of data) {
@@ -29,6 +29,11 @@ export class ListReplace extends Component {
     }
 
     render() {
-        return getTemplate(this.state.data);
+        return (
+            <div style={divStyle}>
+                <h2>List and Replace</h2>
+                {getTemplate(this.state.data)}
+            </div>
+        )
     }
 }
